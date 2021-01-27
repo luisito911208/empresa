@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<form th:action="@{/proveedor/guardar}" method="post" th:object="${proveedor}">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input th:field="*{idProveedor}" type="hidden">
+                <input th:field="*{nombre}" type="text" class="form-control" id="nombre"  name="nombre" placeholder="Nombre del proveedor" required="required">
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="codigo">Codigo</label>
+                <input th:field="*{codigo}" id="codigo" type="text" class="form-control" name="codigo" placeholder="Código proveedor" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input th:field="*{telefono}" id="telefono" type="tel" class="form-control"  name="telefono" placeholder="Teléfono proveedor" required="required">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input th:field="*{email}" id="email" type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input th:field="*{direccion}" type="text" class="form-control"  name="direccion" placeholder="Dirección proveedor" required="required">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="detalles">Detalles</label>
+                <textarea th:field="*{detalles}" class="form-control"  name="detalles" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<script>
+    $('#email').change(function (e) {
+        var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var EmailId = this.value;
+        if (emailRegex.test(EmailId))
+            this.style.backgroundColor = "";
+        else
+            this.style.backgroundColor = "LightPink";
+    });
+
+    jQuery('#codigo').keypress(function (tecla) {
+        if (tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
+    jQuery('#telefono').keypress(function (tecla) {
+        if (tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
+    $("#nombre").bind('keypress', function(event) {
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+</body>
+</html>

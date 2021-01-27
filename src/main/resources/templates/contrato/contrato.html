@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap core CSS -->
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+</head>
+<body>
+<form th:action="@{/contrato/guardar}" method="post" th:object="${contrato}" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label for="contrato">Número de contrato</label>
+                <input th:field="*{idContrato}" type="hidden">
+                <input th:field="*{numeroContrato}" id="contrato" type="text" class="form-control"  name="contrato" placeholder="Número de contrato" required="required">
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="monto">Monto asignado</label>
+                <input th:field="*{montoAsignado}" step="any" id="monto" class="form-control" name="monto" placeholder="Monto asignado" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="proyecto">Proyecto</label>
+                <input th:field="*{proyecto}" id="proyecto" type="text" class="form-control"  name="proyecto" placeholder="Nombre del proyecto" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Proveedor</label>
+                <select class="form-control" th:field="*{proveedor.idProveedor}" id="proveedor" name="proveedor" required="required">
+                    <option th:each="proveedor: ${proveedores}"
+                            th:value="${proveedor.idProveedor}"
+                            th:text="${proveedor.nombre}">
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <div class="input-group date fj-date">
+                    <label for="fecha">Fecha de contratación</label>
+                    <input type="text" class="form-control" id="fecha" autocomplete="off" th:field="*{fechaContrato}" >
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <label for="archivoImagen">Archivo contrato</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="archivoImagen" id="archivoImagen" >
+                    <label class="custom-file-label" for="archivoImagen">Contrato</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div><label>Contrato</label></div>
+                <img id="imagen" class="rounded mx-auto d-block" th:src="@{/imgpupload/{img}(img=${contrato.imagen})}" alt="Generic placeholder image" width="200" height="150">
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Guardar</button>
+        </div>
+    </div>
+</form>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<script>
+
+    $('.fj-date').datepicker({
+        format: "dd/mm/yyyy",
+        language: "es",
+        autoclose: true,
+        todayHighlight: true
+    })
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#imagen').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#archivoImagen").change(function() {
+        readURL(this);
+    });
+
+    $('#monto').on('input', function () {
+        this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
+    });
+
+    var textoInput = document.getElementById("contrato");
+
+    textoInput.oninput = function(event) {
+        textoInput.value = textoInput.value.replace(/[^0-9a-zA-Z_-]/g, "");
+    };
+
+    jQuery('#telefono').keypress(function (tecla) {
+        if (tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
+    $("#proyecto").bind('keypress', function(event) {
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+</body>
+</html>

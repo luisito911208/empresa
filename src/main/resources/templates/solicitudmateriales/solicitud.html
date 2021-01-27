@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<form th:action="@{/solicitud/guardar}" method="post" th:object="${solicitud}">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label>Material</label>
+                <select class="form-control" th:field="*{materialContratado.idMaterial}" id="materiales" name="materiales" required="required">
+                    <option th:each="materialContratado: ${materiales}"
+                            th:value="${materialContratado.idMaterial}"
+                            th:text="${materialContratado.nombreMaterial}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input th:field="*{idSolicitud}" type="hidden">
+                <input th:field="*{cantidad}" id="cantidad" type="number" min="1" class="form-control" name="cantidad" placeholder="Cantidad" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="detalles">Detalles</label>
+                <textarea th:field="*{detalles}" class="form-control"  name="detalles" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    $('#cantidad').on('input', function () {
+        this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
+    });
+
+</script>
+</body>
+</html>

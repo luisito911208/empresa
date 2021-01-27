@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap core CSS -->
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+</head>
+<body>
+<form th:action="@{/calendarizacion/guardar}" method="post" th:object="${calendar}" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Proveedor</label>
+                <select class="form-control" th:field="*{materialContratado.idMaterial}" id="proveedor" name="proveedor" required="required">
+                    <option th:each="material: ${materialescontratados}"
+                            th:value="${material.idMaterial}"
+                            th:text="${material.nombreMaterial}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="monto">Monto estimado</label>
+                <input th:field="*{idCalendarizacion}" type="hidden">
+                <input th:field="*{montoEstimado}" id="monto" type="number" min="1" class="form-control"  name="monto" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="fecha">Mes</label>
+                <select class="form-control" id="fecha" name="fecha" required="required">
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="fecha">Años</label>
+                <select class="form-control" id="anno" name="anno" required="required">
+                    <option value="1">2020</option>
+                    <option value="2">2021</option>
+                    <option value="3">2022</option>
+                    <option value="4">2023</option>
+                    <option value="5">2024</option>
+                    <option value="6">2025</option>
+                    <option value="7">2026</option>
+                    <option value="8">2027</option>
+                    <option value="9">2028</option>
+                    <option value="10">2029</option>
+                    <option value="11">2030</option>
+                    <option value="12">2031</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="detalles">Detalles</label>
+                <textarea  th:field="*{detalles}" class="form-control" id="detalles" name="detalles" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Guardar</button>
+        </div>
+    </div>
+</form>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<script>
+
+</script>
+</body>
+</html>

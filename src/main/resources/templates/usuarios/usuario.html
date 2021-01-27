@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form >
+    <!--    <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>-->
+    <!--        Por favor corrija los siguientes errores:-->
+    <!--        <ul>-->
+    <!--            <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />-->
+    <!--        </ul>-->
+    <!--    </div>-->
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="hidden">
+                <input  type="text" class="form-control"  name="nombre" placeholder="Nombre" required="required">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" type="text" class="form-control" name="apellidos" placeholder="Apellidos" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="nickname">Nombre de usuario</label>
+                <input id="nickname" type="text" class="form-control"  name="nickname" placeholder="Nombre de usuario" required="required">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input id="email" type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Tipo de usuario</label>
+                <select class="form-control"  name="tipousuario" required="required">
+                    <option>
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<script>
+    jQuery('#codigo').keypress(function (tecla) {
+        if (tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
+    jQuery('#telefono').keypress(function (tecla) {
+        if (tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
+    $("#nombre").bind('keypress', function(event) {
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+</body>
+</html>

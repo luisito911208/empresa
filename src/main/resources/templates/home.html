@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SISTEMA|APLICACION</title>
+
+    <!-- Custom fonts for this template -->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+
+
+</head>
+<body>
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!--    Sidebar-->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"   id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Sistema <sup>0.5</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <!--        Información-->
+        <li class="nav-item active">
+            <a class="nav-link btn" id="linkInformacion"  >
+                <span class="text-uppercase  text-light text-center">Información</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!--Proveedores        -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#controlproveedores" aria-expanded="true" aria-controls="controlproveedores">
+                <span class="text-uppercase font-weight-bolder text-light text-center">Control Proveedor</span>
+            </a>
+            <div id="controlproveedores" class="collapse" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a id="linkProveedor"  class="collapse-item btn btn-sm">Proveedor</a>
+                    <a id="linkContratos"   class="collapse-item btn btn-sm">Contratos</a>
+                    <a id="linkCalendario"   class="collapse-item btn btn-sm">Calendarización</a>
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+
+        <!--Materiales        -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#controlmateriales" aria-expanded="true" aria-controls="controlmateriales">
+                <span class="text-uppercase font-weight-bolder text-light text-center">Control Almacén</span>
+            </a>
+            <div id="controlmateriales" class="collapse" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a id="linkMaterialContratado"   class="collapse-item btn btn-sm">Materiales contratados</a>
+                    <a id="linkMaterialRecibido"   class="collapse-item btn btn-sm">Materiales recibidos</a>
+                    <a id="linkMaterialDistribuido"   class="collapse-item btn btn-sm">Materiales distribuidos</a>
+                    <a id="linkSolicitud"    class="collapse-item btn btn-sm">Solicitud al proveedor</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        <!--Reportes        -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reportes" aria-expanded="true" aria-controls="reportes">
+                <span class="text-uppercase font-weight-bolder text-light text-center">Reportes</span>
+            </a>
+            <div id="reportes" class="collapse" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a id="linkreportepresupuesto" class="collapse-item btn btn-sm">Control de presupuesto</a>
+                    <a id="linkreporteavancefisico"   class="collapse-item btn btn-sm">Avance físico-financiero</a>
+                    <a id="linkreporteconcentrado"   class="collapse-item btn btn-sm">Concentrado suministros</a>
+
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!--        Usuarios-->
+        <li class="nav-item active">
+            <a class="nav-link btn" id="linkUsuarios">
+                <span class="text-uppercase  text-light text-center">Control de usuarios</span></a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+
+    <!-- End of Page Wrapper -->
+    <!--    Contenido que va a variar-->
+    <div id="content-wrapper" class="d-flex flex-column">
+    </div>
+
+    <!-- Modal Reportes-->
+    <div class="modal fade" id="myModalReporte" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tiluloModal"> </h5>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!--&lt;!&ndash; Page level custom scripts &ndash;&gt;-->
+
+<script>
+
+    var pag;
+    $(document).ready(function () {
+        switch (localStorage.getItem(pag)) {
+            case 'proveedor' :$("#content-wrapper").load('proveedor/lista');break
+            case 'contrato' :$("#content-wrapper").load("contrato/lista");break
+            case 'calendar' :$("#content-wrapper").load("calendarizacion/lista");break
+            case 'controlpresupuesto' :$("#content-wrapper").load("controlpresupuesto/lista");break
+            case 'materialcontratado' :$("#content-wrapper").load("materialcontratado/lista");break
+            case 'materialrecibido' :$("#content-wrapper").load("materialrecibido/lista");break
+            case 'materialdistribuido' :$("#content-wrapper").load("materialdistribuido/lista");break
+            case 'solicitud' :$("#content-wrapper").load("solicitud/lista");break
+            case 'usuario' :$("#content-wrapper").load("usuario/lista");break
+
+        }
+
+        $("#linkProveedor").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ){
+                $("#content-wrapper").load("proveedor/lista").fadeIn(700)
+                localStorage.setItem(pag,"proveedor")
+            });
+        })
+        $("#linkContratos").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("contrato/lista").fadeIn(700)
+                localStorage.setItem(pag,"contrato")
+            })
+        })
+        $("#linkCalendario").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("calendarizacion/lista").fadeIn(700)
+                localStorage.setItem(pag,"calendar")
+            })
+        })
+        $("#linkpresupuesto").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("controlpresupuesto/lista").fadeIn(700)
+                localStorage.setItem(pag,"controlpresupuesto")
+            })
+        })
+        $("#linkMaterialContratado").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("materialcontratado/lista").fadeIn(700)
+                localStorage.setItem(pag,"materialcontratado")
+            })
+        })
+        $("#linkMaterialRecibido").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("materialrecibido/lista").fadeIn(700)
+                localStorage.setItem(pag,"materialrecibido")
+            })
+        })
+        $("#linkMaterialDistribuido").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("materialdistribuido/lista").fadeIn(700)
+                localStorage.setItem(pag,"materialdistribuido")
+            })
+        })
+        $("#linkSolicitud").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("solicitud/lista").fadeIn(700)
+                localStorage.setItem(pag,"solicitud")
+            })
+        })
+        $("#linkUsuarios").click(function (event) {
+            $("#content-wrapper").fadeOut(500, function( ) {
+                $("#content-wrapper").load("usuario/lista").fadeIn(700)
+                localStorage.setItem(pag,"usuario")
+            })
+        })
+        $("#linkreporteavancefisico").click(function (event) {
+            $('#tiluloModal').text("Reporte avance fisico financiero de suministro")
+            $('.modal-body').load('/reporte/avancefisico',function(){
+                $('#myModalReporte').modal({show:true});
+            });
+        })
+        $("#linkreporteconcentrado").click(function (event) {
+            $('#tiluloModal').text("Reporte concentrado de suministro de materiales")
+            $('.modal-body').load('/reporte/concentrado',function(){
+                $('#myModalReporte').modal({show:true});
+            });
+        })
+    })
+
+</script>
+
+</body>
+
+</html>

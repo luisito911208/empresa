@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap core CSS -->
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+</head>
+<body>
+<form th:action="@{/reporte/generarconcentrado}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Materiales</label>
+                <select class="form-control" id="materialContratado" name="materialContratado" required="required">
+                    <option th:each="material: ${materiales}"
+                            th:text="${material}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Mes</label>
+                <select  class="form-control" id="mes" name="mes">
+                    <option th:each="mes:${meses}" th:text="${mes}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Año</label>
+                <select  class="form-control" id="anno" name="anno">
+                    <option th:each="anno:${anno}" th:text="${anno}">
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Generar</button>
+        </div>
+    </div>
+</form>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<script>
+
+</script>
+</body>
+</html>

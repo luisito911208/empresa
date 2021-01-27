@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap core CSS -->
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+</head>
+<body>
+<form  th:action="@{/materialdistribuido/guardar}" method="post" th:object="${distribuido}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Materiales</label>
+                <select class="form-control" th:field="*{materialRecibido.idMaterialRecibido}" id="materialContratado" name="materialContratado" required="required">
+                    <option th:each="material: ${materialesrecibidos}"
+                            th:value="${material.idMaterialRecibido}"
+                            th:text="${material.materialContratado.nombreMaterial}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input th:field="*{idMaterialDistribuido}" type="hidden">
+                <input th:field="*{cantidad}" id="cantidad" type="number" min="1" class="form-control"  name="cantidad" placeholder="Cantidad" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="fecha">Fecha del pedido</label>
+                <div class="input-group date fj-date">
+                    <input type="text" class="form-control" id="fecha" autocomplete="off" th:field="*{fecha}" >
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="detalles">Detalles</label>
+                <textarea  th:field="*{detalles}" class="form-control" id="detalles" name="detalles" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success float-right mr-2">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script>
+
+    $('.fj-date').datepicker({
+        format: "dd/mm/yyyy",
+        language: "es",
+        autoclose: true,
+        todayHighlight: true
+    })
+
+
+</script>
+</body>
+</html>

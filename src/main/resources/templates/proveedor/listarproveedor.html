@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--    &lt;!&ndash; Custom fonts for this template &ndash;&gt;-->
+    <!--    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">-->
+    <!--    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">-->
+    <link th:href="@{bootstrap-datepicker/css/bootstrap-datepicker.css}" rel="stylesheet"/>
+    <script th:src="@{bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+    <script th:src="@{bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js}" charset="UTF-8"></script>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+
+
+
+</head>
+<body>
+<div>
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <!-- Topbar Search -->
+        <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <h1 class="h3 mb-2 text-gray-800 text-uppercase font-weight-bold"></h1>
+        </div>
+    </nav>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 id="nombreOpcion" class="h3 mb-2 text-gray-800">Proveedores</h1>
+        <!--        DENTRO DE LA TABLA -->
+        <div class="card shadow mb-4">
+            <!--                    MENSAJE DE GUARDADO-->
+            <div th:if="${msg != null}" class='alert alert-success card-body' th:text="${msg}" role='alert'></div>
+            <!--                -------FIN MENSAJE DE GUARDADO--------------------------->
+
+            <!-- TABLAAAAA Example -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <a class="btn btn-primary" id="botonagregar" role="button" href="#">Agregar</a>
+                    <hr>
+                    <!--                    <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>-->
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Código</th>
+                            <th>Correo electrónico</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Operaciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="proveedor:${proveedores}">
+                            <td th:text="${proveedor.nombre}"></td>
+                            <td th:text="${proveedor.codigo}"></td>
+                            <td  th:text="${proveedor.email}"></td>
+                            <td  th:text="${proveedor.telefono}"></td>
+                            <td  th:text="${proveedor.direccion}"></td>
+                            <td>
+                                <!--            th:attr="data-id-marca=${marca.id}"                    -->
+                                <!--BOTON EDITAR -->
+                                <a class="btn btn-success botonEditar btn-sm" th:href="@{/proveedor/editar/{id}(id=${proveedor.idProveedor})}" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                                <!--BOTON ELIMINAR-->
+                                <a class="btn btn-danger botonEliminar btn-sm" th:href="@{/proveedor/vistaeliminar/{id}(id=${proveedor.idProveedor})}" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i> </a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Proveedor</h5>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="eliminarmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Confirmación de elimininación</h5>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2021</span>
+        </div>
+    </div>
+</footer><!-- End of Footer -->
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
+<script>
+    console.log("Estoy en Proveedor")
+    $(document).ready(function () {
+
+        $(".botonEditar").click(function (event) {
+            event.preventDefault();
+            $("#myModal").modal({show:true}).find(".modal-body").load($(this).attr('href'))
+        })
+
+        $(".botonEliminar").click(function (event) {
+            event.preventDefault();
+            $("#eliminarmodal").modal({show:true}).find(".modal-body").load($(this).attr('href'))
+        })
+
+        $("#botonagregar").click(function (event) {
+            $('.modal-body').load('/proveedor/agregar',function(){
+                $('#myModal').modal({show:true});
+            });
+        })
+    })
+
+
+</script>
+</body>
+</html>

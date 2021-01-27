@@ -1,0 +1,16 @@
+CREATE TABLE proveedores (idProveedor int(10) NOT NULL AUTO_INCREMENT, nombre varchar(255), codigo varchar(255), direccion varchar(255), telefono varchar(255), email varchar(255), detalles varchar(255), PRIMARY KEY (idProveedor));
+CREATE TABLE contratos (idContrato int(10) NOT NULL AUTO_INCREMENT, montoAsignado double, numeroContrato varchar(255), fechaContrato date, imagen varchar(255), detalles varchar(255), proyecto varchar(255), proveedoresidProveedor int(10) NOT NULL, PRIMARY KEY (idContrato));
+CREATE TABLE materialescontratados (idMaterial int(10) NOT NULL AUTO_INCREMENT, nombreMaterial varchar(255), unidadMedida varchar(255), cantidad double, precio double, iva double, subtotal double, subtotaliva double, total double, detalles varchar(255), contratosidContrato int(10) NOT NULL, PRIMARY KEY (idMaterial));
+CREATE TABLE solicitudmateriales (idSolicitud int(10) NOT NULL AUTO_INCREMENT, fechaSolicitud date, cantidad double, detalles varchar(255), folio varchar(255), idMaterialContratado int(10) NOT NULL, PRIMARY KEY (idSolicitud));
+CREATE TABLE usuarios (idUsuario int(10) NOT NULL AUTO_INCREMENT, nombreUsuario varchar(255), nombre int(10), email int(10), contrasenna varchar(255), tipoUsuario varchar(255), fechaRegistro int(10), PRIMARY KEY (idUsuario));
+CREATE TABLE trazas (idTrazas int(10) NOT NULL AUTO_INCREMENT, accion varchar(255), fecha date, hora date, usuariosidUsuario int(10) NOT NULL, PRIMARY KEY (idTrazas));
+CREATE TABLE materialesrecibidos (idMaterialRecibido int(10) NOT NULL AUTO_INCREMENT, fechaEntrega date, idMaterialContratado int(10) NOT NULL, numeroDeFolio varchar(255), codigo varchar(255), cantidad double, imagen varchar(255), imagenMaterial varchar(255), detalles varchar(255), PRIMARY KEY (idMaterialRecibido));
+CREATE TABLE materialesdistribuidos (idMaterialDistribuido int(11) NOT NULL AUTO_INCREMENT, fecha date, cantidad double, detalles varchar(255), idMaterialRecibido int(10) NOT NULL, PRIMARY KEY (idMaterialDistribuido));
+CREATE TABLE calendarizacion (idCalendarizacion int(11) NOT NULL AUTO_INCREMENT, fecha date, montoEstimado double, idMaterialContratado int(10) NOT NULL, detalles varchar(255), PRIMARY KEY (idCalendarizacion));
+ALTER TABLE contratos ADD CONSTRAINT FKcontratos933106 FOREIGN KEY (proveedoresidProveedor) REFERENCES proveedores (idProveedor);
+ALTER TABLE solicitudmateriales ADD CONSTRAINT FKsolicitudm777727 FOREIGN KEY (idMaterialContratado) REFERENCES materialescontratados (idMaterial);
+ALTER TABLE trazas ADD CONSTRAINT FKtrazas727144 FOREIGN KEY (usuariosidUsuario) REFERENCES usuarios (idUsuario);
+ALTER TABLE materialescontratados ADD CONSTRAINT FKmateriales485591 FOREIGN KEY (contratosidContrato) REFERENCES contratos (idContrato);
+ALTER TABLE materialesrecibidos ADD CONSTRAINT FKmateriales977553 FOREIGN KEY (idMaterialContratado) REFERENCES materialescontratados (idMaterial);
+ALTER TABLE materialesdistribuidos ADD CONSTRAINT FKmateriales412522 FOREIGN KEY (idMaterialRecibido) REFERENCES materialesrecibidos (idMaterialRecibido);
+ALTER TABLE calendarizacion ADD CONSTRAINT FKcalendariz480999 FOREIGN KEY (idMaterialContratado) REFERENCES materialescontratados (idMaterial);
