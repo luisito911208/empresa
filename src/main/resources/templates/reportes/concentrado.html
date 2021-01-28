@@ -16,7 +16,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Materiales</label>
-                <select class="form-control" id="materialContratado" name="materialContratado" required="required">
+                <select class="form-control"  id="materialContratado" name="materialContratado" required="required">
                     <option th:each="material: ${materiales}"
                             th:text="${material}">
                     </option>
@@ -26,7 +26,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Mes</label>
-                <select  class="form-control" id="mes" name="mes">
+                <select  class="form-control"  id="mes" name="mes">
                     <option th:each="mes:${meses}" th:text="${mes}">
                     </option>
                 </select>
@@ -35,8 +35,8 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Año</label>
-                <select  class="form-control" id="anno" name="anno">
-                    <option th:each="anno:${anno}" th:text="${anno}">
+                <select  class="form-control"  id="anno" name="anno">
+                    <option th:each="anno:${anno}"  th:text="${anno}">
                     </option>
                 </select>
             </div>

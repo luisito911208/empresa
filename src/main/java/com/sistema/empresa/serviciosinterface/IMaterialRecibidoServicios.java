@@ -8,5 +8,6 @@ public interface IMaterialRecibidoServicios {
     void guardar(MaterialRecibido material);
     List<MaterialRecibido> buscarTodas();
     MaterialRecibido buscarPorId(Integer id);
+    MaterialRecibido buscarPorMaterial(String material);
     void eliminar(int id);
 }
